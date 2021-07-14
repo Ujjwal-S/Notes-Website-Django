@@ -1,0 +1,52 @@
+{% extends 'quicky/base.html' %}
+{% load static %}
+
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/quicky/cart.css' %}"> <!--taking styles from cart.css-->
+{% endblock %}
+
+{% block content %}
+
+    <div class="container" style="margin-top: 60px;" onresize="make_btn_small()">
+        
+        {% if my_notes|length < 1 %}
+
+            <h1 style="text-align: center;">You have not purchased any notes yet!</h1>
+        {% else %}
+            <table style="max-width: 700px; margin: 0 auto;" class="table">
+
+                <colgroup>
+                    <col span="1" style="width: 25%;">
+                    <col span="1" style="width: 50%;">
+                    <col span="1" style="width: 25%;">
+                </colgroup>
+
+                <thead style="text-align: center;" class="cart_table_thead">
+                <tr>
+                    <th scope="col">Standard</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">View</th>
+                </tr>
+                </thead>
+                <tbody style="text-align: center;">
+                    {% for my_note in my_notes %}
+                        <tr id="table_cell_{{order_item.id}}">
+                            <td scope="row">{{ my_note.note.standard }}</td>
+                            <td>{{ my_note.note.name }}</td>
+                            <td><a class="btn btn-info my-remove-btn" target="_blank" href="/notes/view_notes/{{ my_note.note.id }}">View</button></a>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    
+        {% endif %}
+    
+    </div>
+
+{% endblock %}
+
+{% block js %}
+{{ block.super }}
+<script src="{% static 'js/notes/my_notes.js' %}"></script>
+{% endblock %}

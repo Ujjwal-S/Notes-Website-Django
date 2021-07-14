@@ -1,0 +1,39 @@
+
+.container{
+    margin-top: 60px; 
+}
+
+.accordion-button:focus{
+    border-color: none;
+    outline: none;
+    box-shadow: none;
+}
+
+th, td{
+    text-align: center;
+}
+td{
+    vertical-align: middle;
+}
+@media (min-width: 992px){
+    .cart-btn{
+        padding: 7px 0;
+    }
+}
+
+.search_result_table_thead{
+    background-color: #343a40;
+    color: white;
+}
+
+h1{
+    text-align: center;
+}   
+
+@media (max-width: 768px){
+    .toastu{
+        width: 80%;
+        padding-right: 10px;
+        padding-bottom: 10px;
+    }
+}

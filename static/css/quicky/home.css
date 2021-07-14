@@ -1,0 +1,444 @@
+@import url('https://fonts.googleapis.com/css2?family=Pattaya&display=swap');
+.hero{
+    height: calc(100vh - 100px);
+    width: 100vw;
+
+    background-image: url("../../images/home_banner.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: 0 3px 20px rgba(0, 155, 255, .3);
+}
+
+.create_account_now{
+    width: 260px;
+    font-family: 'Pattaya', sans-serif;
+    font-size: 1.9rem;
+    letter-spacing: 1px;
+    color: white;
+
+    position: relative;
+    left: 180px;
+    left: 13%;
+    bottom: 10px;
+    animation: slideInFromLeft 1s ease-in-out;
+}
+.create_account_now span{
+    font-size: 3.5rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+.my-hero-card{
+    width: 432px;
+    height: 436px;
+    background-color: white;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .6);
+    border-radius: 0 25px 0 25px;
+
+    position: relative;
+    right: 160px;
+    right: 11.5%;
+    animation: slideInFromRight 1s ease-in-out;
+}
+.my-hero-container{
+    width: 100%;
+    height: 100%;
+    padding: 25px 20px 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.my-hero-card{
+    perspective: 4000px;
+}
+.my-hero-container{
+    position: relative;
+    transform-style: preserve-3d;
+    transition: .5s;
+}
+.aage, .peeche{
+    position: absolute;
+    backface-visibility: hidden;
+    width: 90.5%;
+}
+.peeche{
+    background-color: white;
+    transform: rotateY(180deg);
+}
+.my-hero-form-field {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .3);
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 5px 15px 10px;
+}
+.my-hero-form-field label{
+    margin-bottom: 7px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: rgba(51, 51, 51, 0.9);
+}
+.my-hero-form-field input{
+    all: unset;
+    width: 88%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.671);
+    transition: .3s;
+}
+.aage .my-hero-form-field:first-child input{
+    width: 42%;
+}
+.my-hero-form-field input:focus{
+    width: 92%;
+}
+.aage .my-hero-form-field:first-child input:focus{
+    width: 50%;
+}
+
+.my-hero-form-field:last-child{
+    box-shadow: 0 0 0;
+    padding: 0;
+}
+.my-hero-form-field button, #register-palat, #login-palat{
+    all: unset;
+    border-radius: 3px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .3) ;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    padding: 5px 0;
+    transition: .3s;
+}
+.my-hero-form-field button{
+    width: 68%;
+    background-color: #242E4C;
+    margin-right: 5px;
+    letter-spacing: 1px;
+}
+.my-hero-form-field #register-palat, .my-hero-form-field #login-palat{
+    display: inline-block;
+    width: 29%;
+    background-color: rgba(0, 128, 0, 0.87);
+}
+.my-hero-form-field button:hover, .my-hero-form-field #register-palat:hover, .my-hero-form-field #login-palat:hover{
+    transform: scale(.98);
+    cursor: pointer;
+}
+
+.my-error{
+    color: red;
+    position: relative;
+    bottom: 2px;
+    left: 15px;
+}
+.peeche{
+    height: 94%;
+    width: 93%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.peeche form{
+    width: 92%;
+    border: 6px solid #36b98a;
+    border-radius: 0 25px 0 25px;
+    padding: 11px;
+}
+#forgot_password{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+
+/* PCB */
+.pcb-img{
+    height: 150px;
+    width: 330px;
+    animation: badaChota 1.7s infinite;
+    margin-left: 30px;
+    margin-top: 45px;
+    margin-bottom: 20px;
+}
+.pcb{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.pcb-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    visibility: hidden;
+}
+.pcb-text p {
+    font-size: 2.5rem;
+    color:#333;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0 auto;
+    border-right: .12em solid orange;
+}
+.animation p {
+    visibility: visible;
+    animation: typing 2s steps(60), 
+               blink-caret 0.85s step-end infinite;
+}
+/* PCB ENDs */
+
+
+/* NOTES */
+#notes{
+    margin-top: 50px;
+}
+.row{
+    padding-top: 32px;
+}
+.pcb-cards{
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .2);
+    border-radius: 5px;
+    transition: .3s;
+}
+.pcb-cards:hover{
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .3);
+}
+.card{
+    border: none;
+}
+.card-body strong{
+    padding: 3px 7px;
+    color: white;
+    background-color: rgb(10, 200, 146);
+    border-radius: 5px;
+}
+
+/* NOTES ENDs */
+
+/* UPADTES */
+
+.my-update-card{
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .2);
+    border-radius: 5px;
+    margin: 40px auto;
+}
+.update-heading{
+    display: flex;
+    justify-content: center;
+}
+.update-heading p{
+    font-size: 3rem;
+    font-weight: bold;
+    font-family: 'KoHo', sans-serif;
+    width: max-content;
+
+    background: linear-gradient(135deg, rgba(10, 200, 146, 1) 0%, rgba(0, 155, 255, 1) 37.5%, rgba(0, 155, 255, 1) 75%, rgba(255, 0, 0, .6) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+.my-update-card form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.my-update-card form input{
+    all: unset;
+    border-bottom: 1px solid rgba(10, 200, 146, 1);
+    width: 40%;
+    color: rgba(0, 155, 255, .9);
+}
+.updates-email::placeholder, .updates-email::-moz-placeholder{
+    color: rgba(0, 155, 255, .9);
+    letter-spacing: 1px;
+    font-size: 1.1rem;
+    transition: .4s;
+}
+.updates-email:focus::placeholder{
+    transform: translateX(100%);
+}
+.my-update-card button{
+    all: unset;
+    margin: 20px 0;
+    border: 1px solid rgba(0, 155, 255, 1);
+    border-radius: 5px;
+    letter-spacing: 2px;
+    font-family: 'KoHo', sans-serif;
+    font-weight: 700;
+    padding: 0px 25px 3px;
+    transition: .3s;
+    font-size: 1.5rem;
+}
+.my-update-card button:hover{
+    cursor: pointer;
+    color: white;
+    background-color: rgba(0, 155, 255, 1);
+}
+/* UPADTES ENDs */
+
+/* Animations */
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-170%);
+    }
+    100%{
+        transfrom: translateX(0);
+    }
+}
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+    }
+    100%{
+        transfrom: translateX(0);
+    }
+}
+@keyframes slideInFromBottom {
+    0% {
+        transform: translateY(100%);
+    }
+    100%{
+        transfrom: translateY(0);
+    }
+}
+@keyframes badaChota {
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(.95);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+@keyframes typing {
+    from { 
+    width: 0; 
+    }
+    to { 
+    width: 100%; 
+    }
+}
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: orange }
+}
+
+/* MEDIA QUERIES */
+
+@media (max-width: 991.98px){
+    .hero{
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .my-hero-card{
+        right: 0;
+    }
+    .create_account_now{
+        width: 410px;
+        left: 0;
+        bottom: 0;
+
+        margin-top: calc(  (  (calc(100vh - 100px)  ) - 520px  ) / 2);  /* 520px (height of hero card + height of create_account_now)*/
+    }
+    .create_account_now span{
+        display: inline;
+    }
+    .pcb-text p{
+        font-size: 2rem;
+    }
+    .my-update-card button{
+        font-size: 1.3rem;
+    }
+    .my-update-card button{
+        font-size: 1.1rem;
+    }
+    .my-update-card form input{
+        width: 51%;
+    }
+}
+
+@media (max-width: 650px){
+    .pcb-text p{
+        font-size: 1.5rem;
+    }
+    .update-heading p{
+        font-size: 2.3rem;
+        background: linear-gradient(135deg, rgba(10, 200, 146, 1) 35%, rgba(0, 155, 255, 1) 45%, rgba(255, 0, 0, .6) 75%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
+
+@media (max-width: 500px){
+    .my-hero-card{
+        width: 90vw;
+        animation: slideInFromBottom .8s ease-in-out;
+    }
+    .my-hero-form-field button:first-child{
+        margin-right: 0;
+    }
+    .peeche form{
+        width: 100%;
+        border: 4px solid #36b98a;
+    }
+    .create_account_now{
+        font-size: 1.2rem;
+        width: 280px;
+        margin-top: calc(  (  (calc(100vh - 100px)  ) - 496px  ) / 2);  /* 496px (height of hero card + height of create_account_now)*/
+    }
+    .create_account_now span{
+        font-size: 2.5rem;
+    }
+    .pcb-img{
+        height: 135px;
+        width: 300px;
+    }
+    .pcb-text p{
+        font-size: 1.1rem;
+    }
+    .my-update-card form input{
+        width: 62%;
+    }
+}
+
+
+
+
+@media (max-height: 600px){
+    .peeche{
+        height: 100%;
+        position: relative;
+        bottom: 7px;
+    }
+    .create_account_now{
+        margin-top: -10px;
+    }
+    .my-hero-container{
+        padding: 20px 0 0 0;
+    }
+    .my-hero-card{
+        height: 410px;
+    }
+    .my-error{
+        font-size: 0.8rem;
+    }
+}

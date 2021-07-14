@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+{% load account %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/account/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/account/email_confirm__password_reset.css' %}">
+    <title>Confirm Email</title>
+</head>
+<body onresize="kashti()">
+    <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+        <fieldset>
+            <legend>&nbsp; The &#xb7; Quicky &#xb7; Science &nbsp;</legend>
+            {% if confirmation %}               
+
+                <div class="message">
+                    <p class="m1">Please click the button below in order to confirm the following email address.</p>
+                </div>
+                <div class="message">
+                    <p class="m2">E-Mail : <span>{{ confirmation.email_address.email }}</span></p>
+                </div>
+                {% csrf_token %}
+                <button>Confirm 👊</button>
+                <div id="kashti" class="message">
+                </div>
+
+            {% else %}
+
+                <div class="message">
+                    <p class="m1">This e-mail confirmation link expired or is invalid !!!!</p>
+                </div>
+
+                <div class="message">
+                    <p class="m2">Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.</p>
+                </div>
+                <div id="kashti" class="message">
+                </div>
+
+            {% endif %}
+        </fieldset>
+    </form>
+
+    <script src="{% static 'js/account/main.js' %}"></script>
+</body>
+</html>

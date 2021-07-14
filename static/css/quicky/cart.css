@@ -1,0 +1,10 @@
+th{
+    padding: 15px 0!important;
+}
+td{
+vertical-align: middle;
+}
+.cart_table_thead{
+    background-color: #343a40;
+    color: white;
+}

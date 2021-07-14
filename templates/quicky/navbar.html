@@ -1,0 +1,70 @@
+{% load static %}
+{% load cart_info_template_tag %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/quicky/navbar.css' %}">
+{% endblock %}
+
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">The Quicky Science</a>
+        <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/notes/my_notes/">My Notes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/cart">My Cart
+                        <span id="latest_cart_items_count" class="badge bg-light text-dark align-text-bottom pb-1">{% total_items_in_cart %}</span>
+                    </a>
+                </li>
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
+                            aria-expanded="false">Profile</a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                            <li><a class="dropdown-item" href="#">Hello, <span> {{request.user.first_name}} </span></a></li>
+                            <li><a class="dropdown-item" href="#">Points : <span>{{request.user.points}}</span></a></li>
+                            <li><a class="dropdown-item" href="/profile">Settings</a></li>
+                            <li><a class="dropdown-item" href="/accounts/logout/">Sign Out</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a id="signup-login-btn" class="nav-link" aria-current="page" href="#">SignUp/LogIn</a>
+                    </li>
+                {% endif %}
+            </ul>
+            <form id="search_form" class="d-flex" action="/notes/search/" onsubmit="return false">
+                <input id="search_input" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q" required="">
+                <button id="search_input_btn" class="btn my-nav-btn" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="nav-scroller bg-body shadow-sm">
+    <nav class="nav nav-underline" aria-label="Secondary navigation">
+        <a class="nav-link" target="_blank" href="https://www.youtube.com/channel/UCzIXQKJxt0PY3xKAtvyEfjQ">Youtube</a>
+        <!-- <a class="nav-link" id="nav-link-notes" onclick="handelNavbarLinks(this)">Notes</a> -->
+        <a class="nav-link" id="nav-link-notes" onclick="handelNavbarLinks('Notes')">Notes</a>
+        <a class="nav-link" id="nav-link-kmu" onclick="handelNavbarLinks('keepMeUpdated')">Keep me updated</a>
+        <a class="nav-link" target="_blank" href="https://ncert.nic.in/textbook.php">Download NCERT</a>
+        <a class="nav-link" href="#">Pharmacy Exam Updates</a>
+    </nav>
+</div>
+
+
+{% block js %}
+<script>
+    let is_auth = `{{ user.is_authenticated }}`;
+    let home_page_url = `{% url 'home' %}`
+    let domain_url = `{{ request.site }}`
+</script>
+<script defer src="{% static 'js/quicky/navbar.js' %}"></script>
+{% endblock %}

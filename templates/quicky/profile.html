@@ -1,0 +1,114 @@
+{% extends 'quicky/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="row mb-5">
+    <h1 class="text-center my-5"><mark><u>Your Profile</u></mark></h1>
+    <div class="col-xl-6 offset-xl-3 col-md-8 offset-md-2 col-10 offset-1"> 
+
+
+            <form action="" method="POST" novalidate class="needs-validation">
+                <div class="mb-3">
+                    <label class="form-label" for="first_name"><b>First Name</b></label>
+                    <input class="form-control" id="id_first_name" name="first_name" type="text" required value="{{ request.user.first_name }}">
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">
+                        Fill your First Name
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="last_name"><b>Last Name</b></label>
+                    <input class="form-control" id="last_name" name="last_name" type="text" required value="{{ request.user.last_name }}">
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">
+                        Fill your Last Name
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="email"><b>Email</b></label>
+                    <input class="form-control" id="email" type="email" disabled required value="{{ request.user.email }}">
+                </div>
+                <div class="mb-3" id="passWord">
+                    <label for="password1" class="form-label">New Password</label>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" name="password1" id="password1" placeholder="Password">
+                        <span class="input-group-text">~</span>
+                        <input type="password" class="form-control" name="password2" id="password2" placeholder="Confirm Password">
+
+                          <div class="invalid-feedback" id="password-invalid-feedback">
+                            kuch galat hai
+                        </div>
+                    </div>
+
+                </div>
+                <div class="mb-3">
+                    <div class="input-group mb-3">
+                        <label class="form-label" for="points"><b>Points</b></label>
+                        <div class="input-group mb-3">
+                            <input id="points" type="text" class="form-control" disabled required value="{{ request.user.points }}">
+                            <a href="#" class="btn btn-primary" id="basic-addon2">Learn More</a>
+                        </div>
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+                </div>
+                {% csrf_token %}
+                <div class="mb-3">
+                    <button class="btn btn-success">Update Profile</button>
+                </div>
+            </form>
+
+    </div>
+</div>
+
+<script>
+
+    document.getElementById("passWord").addEventListener("input", function(){
+        let p1 = document.getElementById("password1")
+        let p2 = document.getElementById("password2")
+        let pif = document.getElementById("password-invalid-feedback")
+
+
+        if (p1.value.length < 8){
+            p1.setCustomValidity('kuch galat')
+            pif.innerText = "Minimum 8 characters required."
+        }
+        else{
+            p1.setCustomValidity('')
+            pif.innerText = ""
+            
+            if (p1.value !== p2.value){
+                p2.setCustomValidity('kuch galat')
+                pif.innerText = 'Passwords are not same.'
+            }
+            else{
+                p2.setCustomValidity('')
+                pif.innerText = ""
+            }
+        }
+
+    });
+
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+            })
+        })()
+</script>
+
+{% endblock %}

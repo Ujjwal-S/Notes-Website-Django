@@ -1,0 +1,80 @@
+{% extends 'quicky/base.html' %}
+{% load static %}
+
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/notes/main.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+      <div class="accordion" id="accordionExample">
+        {% for subject,notes  in super_notes.items %}
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="s{{ subject.id }}-heading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#s{{ subject.id }}" aria-expanded="true" aria-controls="s{{ subject.id }}"> <!-- id of html element cannot start with a number-->
+                <div>
+                  <a type="button" class="btn {% cycle 'btn-primary' 'btn-warning' 'btn-success' %}" style="margin-right: 15px;">{{ subject.name }}</a>
+                </div>
+              </button>
+            </h2>
+            <div id="s{{ subject.id }}" class="accordion-collapse collapse" aria-labelledby="s{{ subject.id }}-heading" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <table class="table">
+                  <thead class="{% cycle 'bg-primary' 'bg-warning' 'bg-success' %}">
+                    <tr>
+                      <th class="text-light" scope="col">Unit</th>
+                      <th class="text-light" scope="col">Chapter</th>
+                      <th class="text-light" scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for note in notes %}
+                      <tr>
+                        <th id="{{ note.id }}" class="d-none"></th>
+                        <td><strong>{{ note.unit }}</strong></td>
+                        <td>{{ note.name }}</td>
+                        {% if request.user.is_authenticated %}
+                              <td>
+                                <!-- <a href="/notes/view_notes/{{ note.id }}/"> -->
+                                <a id="{{ note.id }}" target="_blank">
+                                  <button id="button-{{ note.id }}" data-id_s={{note.id}} data-bought="false" class="add-to-cart btn btn-outline-dark cart-btn d-flex justify-content-center align-items-center" disabled type="button" style="width: 100%;">
+
+                                      <span style="color: black;" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+
+                                  </button>
+                                </a>
+                              </td>
+                          {% else %}
+                              <td>
+                                  <!-- LOGIN TO CONTINUE -->
+                                  <button class="btn btn-outline-dark cart-btn d-flex justify-content-center align-items-center" type="button" style="width: 100%;" onclick="alert('Login to Continue')">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
+                                      <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+                                      </svg>
+                                  </button>
+                              </td>
+                          {% endif %}
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+  </div>
+  <!-- Toast -->
+  <div class="toast-container">
+    <div id="toast-container" class="position-fixed bottom-0 end-0 p-md-3 toastu" style="z-index: 5">
+    
+    </div>
+  </div>
+{% endblock %}
+
+{% block js %}
+{{ block.super }}
+<script src="{% static 'js/notes/main.js' %}"></script>
+{% endblock %}

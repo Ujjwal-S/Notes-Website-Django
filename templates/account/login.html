@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.location = "{{ request.site }}";
+    </script>
+    <title>Login</title>
+    <style>
+        h1{
+            visibility: hidden;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        a{
+            all:unset;
+            padding: 7px 15px;
+            border: 1px solid;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0,0, 0,.3);
+
+            visibility: hidden;
+        }
+        a:hover{
+            cursor: pointer;
+        }
+        p{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <p>{{ request.site }}</p>
+    <h1>Go back to home page and try again.</h1>
+    
+    <p><a href="{% url 'home' %}">Take me to home page</a></p>
+    <script>
+        setTimeout(()=>{
+            document.getElementsByTagName("h1")[0].style.visibility = "visible";
+            document.getElementsByTagName("a")[0].style.visibility = "visible";
+        }, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+{% extends 'quicky/base.html' %}
+
+{% load static %}
+
+{% block title %}
+The Quicky Science | Home 
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/quicky/home.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+    </symbol>
+    <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+    </symbol>
+    <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+    </symbol>
+</svg>
+
+{% if not request.user.is_authenticated %}
+    <!-- HERO SECTION -->
+        <div class="hero" id="hero">
+            <div class="create_account_now">
+                Create your Account <span>Now!!</span>
+            </div>
+            <div class="my-hero-card">
+                <div class="my-hero-container">
+                    <div class="aage">
+                        <form method="POST" action="/accounts/signup/" onsubmit="return false">
+                            <div class="my-hero-form-field">
+                                <label>Name</label><br>
+                                <input type="text" name="first_name" placeholder="First Name" autocomplete="off" required>
+                                &nbsp;
+                                <input type="text" name="last_name" placeholder="Last Name" autocomplete="off" required>
+                            </div>
+                            <div class="my-hero-form-field">
+                                <label for="email">Email</label>
+                                <small class="my-error invisible"></small> 
+                                <br>
+                                <input type="email" id="Remail" name="email" placeholder="Enter your Email." autocomplete="off" required>
+                            </div>
+                            <div class="my-hero-form-field">
+                                <label for="password1">Password</label>
+                                <small class="my-error invisible" id="inp-pass-e1">**Minimum 8 Characters.</small>
+                                <br>
+                                <input type="password" name="password1" placeholder="Set your Password." autocomplete="off" required>
+                            </div>
+                            <div class="my-hero-form-field">
+                                <label for="password2">Again</label>
+                                <small class="my-error invisible" id="inp-pass-e2">**Passwords do Not match.</small>
+                                <br>
+                                <input type="password" name="password2" placeholder="Confirm your Password." autocomplete="off" required>
+                            </div>
+                            {% csrf_token %}
+                            <div class="my-hero-form-field">
+                                <button id="aage_register_btn" onclick="isValid()">Register</button>
+                                <a id="register-palat">Login</a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="peeche">
+                        <div id="login_error" class="d-none alert alert-danger d-flex align-items-center" role="alert">
+                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                            <div>
+                                Invalid Email or Password.
+                            </div>
+                        </div>
+                        <form method="POST" action="{% url 'account_login' %}">
+                            {% csrf_token %}
+                            <div class="my-hero-form-field">
+                                <label for="email">Email</label><br>
+                                <input type="email" name="login" placeholder="Enter your Email." autocomplete="off" required>
+                            </div>
+                            <div class="my-hero-form-field">
+                                <label for="password1">Password</label><br>
+                                <input type="password" name="password" placeholder="Enter your Password." autocomplete="off" required>
+                            </div>
+                            <a id="forgot_password" href="{% url 'account_reset_password' %}">Forgot Password?</a>
+                            <div class="my-hero-form-field">
+                                <button id="peeche_login_btn" type="submit">Login</button>
+                                <a id="login-palat">Register</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- HERO SECTION ENDs -->
+{% endif %}
+
+<!-- PCB TEXT -->
+    <section class="pcb">
+
+        <img class="pcb-img" src="{% static 'images/cloud.png' %}" alt="Cloud Image" draggable="false">
+
+        <div class="pcb-text" id="animated_text">
+            <p id="Notes"> Physics, Chemistry, Biology, Pharmacy.</p>
+        </div>
+
+    </section>
+<!-- PCB TEXT ENDs -->
+
+
+<!--NOTES SECTION-->
+    <div class="container" id="notes">
+        <hr>
+        <!-- <div class="pcb-cards"> -->
+            <div class="row mb-2">
+                <div class="col-md-6">
+                    <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                        <div class="pcb-cards">
+                            <div class="card-body d-flex flex-column align-items-start">
+                                <strong class="d-inline-block mb-2">The Quicky Science</strong>
+                                <h3 class="mb-2">
+                                    <a class="text-dark text-decoration-none" href="#">Why get these notes ?</a>
+                                </h3>
+                                <div class="mb-1 text-muted">Nov 12</div>
+                                <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+                                <a href="#">Continue reading</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                        <div class="pcb-cards">
+                            <div class="card-body d-flex flex-column align-items-start">
+                                <strong class="d-inline-block mb-2">The Quicky Science</strong>
+                                <h3 class="mb-2">
+                                    <a class="text-dark text-decoration-none" href="#">Class 11, Notes</a>
+                                </h3>
+                                <div class="mb-1 text-muted">Nov 12</div>
+                                <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+                                <a href="/notes/11/">Open Notes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                        <div class="pcb-cards">
+                            <div class="card-body d-flex flex-column align-items-start">
+                                <strong class="d-inline-block mb-2">The Quicky Science</strong>
+                                <h3 class="mb-2">
+                                    <a class="text-dark text-decoration-none" href="#">Class 12, Notes</a>
+                                </h3>
+                                <div class="mb-1 text-muted">Nov 12</div>
+                                <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+                                <a href="/notes/12/">Open Notes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                        <div class="pcb-cards">
+                            <div class="card-body d-flex flex-column align-items-start">
+                                <strong class="d-inline-block mb-2">The Quicky Science</strong>
+                                <h3 class="mb-2">
+                                    <a class="text-dark text-decoration-none" href="#">Pharmacy Notes</a>
+                                </h3>
+                                <div class="mb-1 text-muted">Nov 12</div>
+                                <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+                                <a href="/notes/Pharmacy/">Open Notes</a> <!--TODO NOTES KI LINK DEKH LENA-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <!-- </div> -->
+    </div>
+<!--NOTES SECTION ENDs-->
+
+<!--GET UPDATES-->
+    <div class="card col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10 my-update-card" id="keepMeUpdated">
+        
+        <div id="update-status" class="d-none alert alert-primary d-flex align-items-center" role="alert">
+            <svg style="margin-right: 20px!important" class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+            <div id="update-status-message">
+            </div>
+          </div>
+
+        <div class="update-heading">
+            <p>Keep Me Updated</p>
+        </div>
+        <form id="updates-form">
+            <input id="updates-email" class="updates-email" type="email" placeholder="Email" required>
+            <button tupe="submit">
+                Submit
+            </button>
+        </form>
+    </div>
+<!--GET UPDATES ENDs-->
+{% endblock %}
+
+{% block js %}
+{{ block.super }}
+    {% if not request.user.is_authenticated %}
+    <script src="{% static 'js/quicky/homeHERO.js' %}"></script>
+    {% endif %}
+<script src="{% static 'js/quicky/home.js' %}"></script>
+{% endblock %}

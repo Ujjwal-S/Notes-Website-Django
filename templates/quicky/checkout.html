@@ -1,0 +1,133 @@
+{% extends 'quicky/base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/quicky/checkout.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container py-3">
+        <div class="row gap-3">
+            <div class="col-lg py-2 px-3">
+                <section class="d-flex align-items-center justify-content-between">
+                    <div class="h1 d-inline text-primary your-cart">
+                        Your Cart
+                        <span class="h2 text-secondary your-cart-span">({{ orderItemsCount }})</span>
+                    </div>
+                    <div>
+                      <a href="/cart" class="btn btn-light back-to-cart">
+                        <i class="bi bi-chevron-left"></i><small id="back-to-cart"> Back To Cart</small>
+                      </a>
+                    </div>
+                </section>
+                
+                <hr style="margin-top: 9px;">
+                
+                {% if orderItemsCount != 0 %}
+                    <table class="table table-primary">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for orderItem in orderItems %}
+                            <tr class="table-light">
+                              <th scope="row">{{ forloop.counter }}</th>
+                              <td data-orderItemId={{orderItem.id}}>{{ orderItem.note_name.name }}</td>
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                  {% else %}
+                    <p class="h1 text-center my-5"><mark>Cart is Empty</mark></p>
+                  {% endif %}
+            </div>
+            <div class="col-lg py-2">
+                <div class="h1 checkout-heading">Checkout</div>
+                
+                <hr>
+
+                <div class="bg-light p-3 mb-3 your-points-section" style="margin-left: 3px;">
+                  <p>
+                    <i class="bi bi-toggles2 fs-5 your-points-icon"></i>
+                    <span class="h2 px-2">Your Points :</span>
+                    <span id="user_points" class="h2 text-primary">{{ request.user.points }}</span>
+                  </p>
+
+                  <div class="form-check form-switch use-your-points">
+                    <label class="form-check-label usePoints" for="flexSwitchCheckDefault">
+                      <i class="bi bi-arrow-return-right"></i>
+                      <span class="px-3">Use Your Points</span>
+                    </label>
+                    <input class="form-check-input float-end" type="checkbox" id="flexSwitchCheckDefault">
+                    <i class="bi bi-question-circle-fill fs-6" id="more-info-question-icon"></i>
+                  </div>
+                </div>
+
+                <div class="bg-light p-3 mb-2" style="margin-left: 3px;">
+                  <p>
+                    <i class="bi bi-wallet2 fs-5 your-points-icon"></i>
+                    <span class="h2 px-2">Payable Amount :</span>
+                    <span id="payable-amount" class="h2 text-primary">&#x20b9;&nbsp;{{checkout_total}}</span>
+                  </p>
+
+                  <div class="use-your-points">
+                    <label class="usePoints">
+                      <i class="bi bi-arrow-return-right"></i>
+                      <button id="payBtn" class="btn btn-success px-3">Pay Amount</button>
+                    </label>
+
+                  </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Toast -->
+    <div class="toast-container">
+      <div id="toast-container" class="position-fixed bottom-0 end-0 p-md-3 toastu" style="z-index: 5">
+      
+      </div>
+    </div>
+    
+{% endblock %}
+
+{% block js %}
+{{ block.super }}
+<script>
+  let orderItemsCount = `{{ orderItemsCount }}`
+</script>
+<script defer src="{% static 'js/quicky/checkout.js' %}"></script>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+var options = {
+    "key": "rzp_test_G0OCZoTqqEwDLs", // Enter the Key ID generated from the Dashboard
+    "name": "The Quicky Science",
+    "description": "Test Transaction",
+    "image": "https://example.com/your_logo",
+    "order_id": "{{order_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+    "prefill": {
+        "name": "Gaurav Kumar",
+        "email": "gaurav.kumar@example.com",
+        "contact": "9999999999"
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+document.getElementById('payBtn').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
+
+{% endblock %}
