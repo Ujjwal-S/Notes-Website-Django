@@ -27,3 +27,7 @@ urlpatterns = [
 ]
 urlpatterns += static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler400 = 'quicky.views.error_400'
+handler404 = 'quicky.views.error_404'
+handler500 = 'quicky.views.error_500'

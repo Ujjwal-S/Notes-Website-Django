@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('', views.home, name="home"),
@@ -13,4 +14,8 @@ urlpatterns = [
 
     path('checkemail/<str:email>', views.emailExists, name="checkEmailExists"),
     path('addsubscriber/<str:email>', views.addSubscriber, name="addSubscriber"),
+
+    path('verify_razorpay_payment/', views.verify_razorpay_payment, name="verify_razorpay_payment"),
+
+    path('learn_more_about_points/', TemplateView.as_view(template_name="quicky/learn_more.html"))
 ]

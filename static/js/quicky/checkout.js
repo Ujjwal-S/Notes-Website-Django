@@ -1,3 +1,5 @@
+let payBtn = document.getElementById("payBtn")
+
 let points_checker = document.getElementById("flexSwitchCheckDefault");
 
 let user_points = document.getElementById("user_points");
@@ -6,7 +8,15 @@ let original_user_points = parseInt(user_points.innerText);
 let payable_amount = document.getElementById("payable-amount");
 let original_payable_amount = parseInt(payable_amount.innerText.slice(2));
 
-let payBtn = document.getElementById("payBtn")
+
+if (final_pay_time == 'True'){
+  if (has_used_points == 'True'){
+    payable_amount.innerHTML = `&#x20b9;&nbsp;${parseInt(payable_amount.innerText.slice(2)) - parseInt(user_points.innerText)}`
+    user_points.innerText = 0;
+  }
+  payBtnF.click()
+}
+
 
 points_checker.addEventListener("click", ()=>{
 
@@ -36,6 +46,8 @@ points_checker.addEventListener("click", ()=>{
         else changeMyNotesToPay()
     }
 
+    document.getElementById("hidden_price").value = `${payable_amount.innerText.slice(2)}`
+
 })
 
 function changePayToMyNotes(){
@@ -55,7 +67,7 @@ if (orderItemsCount == 0){
 let q_icon = document.getElementById("more-info-question-icon");
 
 q_icon.addEventListener("click", ()=> {
-    sendToast("https://emojiguide.com/wp-content/uploads/platform/google/44074.png", "<a href='#' class='text-dark'><b>Click here</b></a><span class='text-secondary'> to know more</span>")
+    sendToast("https://emojiguide.com/wp-content/uploads/platform/google/44074.png", `<a href="${domain_url}learn_more_about_points/" class='text-dark'><b>Click here</b></a><span class='text-secondary'> to know more</span>`)
 })
 
 

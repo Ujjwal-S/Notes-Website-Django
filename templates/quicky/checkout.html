@@ -73,15 +73,18 @@
                     <span id="payable-amount" class="h2 text-primary">&#x20b9;&nbsp;{{checkout_total}}</span>
                   </p>
 
-                  <div class="use-your-points">
-                    <label class="usePoints">
-                      <i class="bi bi-arrow-return-right"></i>
-                      <button id="payBtn" class="btn btn-success px-3">Pay Amount</button>
-                    </label>
-
-                  </div>
+                  <form action="" method="POST">
+                  {% csrf_token %}
+                    <div class="use-your-points">
+                      <label class="usePoints">
+                        <i class="bi bi-arrow-return-right"></i>
+                        <input type="text" id="hidden_price" name="final_pay_amount" value="{{checkout_total}}" hidden>
+                        <button id="payBtn" class="btn btn-success px-3">Pay Amount</button>
+                        <button id="payBtnF" class="d-none"></button>
+                      </label>
+                    </div>
+                  </form>
                 </div>
-
             </div>
         </div>
     </div>
@@ -96,38 +99,39 @@
 
 {% block js %}
 {{ block.super }}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
+
+  let final_pay_time = `{{final_pay_time}}`
   let orderItemsCount = `{{ orderItemsCount }}`
+  let has_used_points = `{{has_used_points}}`
+
+    var options = {
+      "key": "rzp_test_G0OCZoTqqEwDLs", // Enter the Key ID generated from the Dashboard
+      "name": "The Quicky Science",
+      "description": "Complete Payment to access notes.",
+      "image": "{% static 'images/favicon.png' %}",
+      "order_id": "{{order_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      "callback_url": "/verify_razorpay_payment/",
+      "prefill": {
+          "name": "{{request.user.first_name}} {{request.user.last_name}}",
+          "email": "{{request.user.email}}"
+      },
+      "theme": {
+          "color": "#3399cc"
+      }
+  };
+  var rzp1 = new Razorpay(options);
+  document.getElementById('payBtnF').onclick = function(e){
+      rzp1.open();
+      e.preventDefault();
+  }
+
+
+
 </script>
+
 <script defer src="{% static 'js/quicky/checkout.js' %}"></script>
 
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
-<script>
-var options = {
-    "key": "rzp_test_G0OCZoTqqEwDLs", // Enter the Key ID generated from the Dashboard
-    "name": "The Quicky Science",
-    "description": "Test Transaction",
-    "image": "https://example.com/your_logo",
-    "order_id": "{{order_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-    "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
-    "prefill": {
-        "name": "Gaurav Kumar",
-        "email": "gaurav.kumar@example.com",
-        "contact": "9999999999"
-    },
-    "notes": {
-        "address": "Razorpay Corporate Office"
-    },
-    "theme": {
-        "color": "#3399cc"
-    }
-};
-var rzp1 = new Razorpay(options);
-document.getElementById('payBtn').onclick = function(e){
-    rzp1.open();
-    e.preventDefault();
-}
-</script>
 
 {% endblock %}

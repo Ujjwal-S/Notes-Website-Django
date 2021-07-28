@@ -44,10 +44,20 @@
                 </div>
                 <div class="mb-3">
                     <div class="input-group mb-3">
-                        <label class="form-label" for="points"><b>Points</b></label>
+                        <label class="form-label" for="points"><b>Your Points</b></label>
                         <div class="input-group mb-3">
                             <input id="points" type="text" class="form-control" disabled required value="{{ request.user.points }}">
-                            <a href="#" class="btn btn-primary" id="basic-addon2">Learn More</a>
+                            <a href="{{request.site.domain}}learn_more_about_points/" class="btn btn-primary" id="basic-addon2">Learn More</a>
+                        </div>
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="input-group mb-3">
+                        <label class="form-label" for="points"><b>Your Referral Link</b></label>
+                        <div class="input-group mb-3">
+                            <input id="y_ref_link" type="text" class="form-control" readonly="readonly" required value="{{request.site.domain}}?ref={{request.user.referral.refer_id}}">
+                            <a href="#" class="btn btn-primary" id="y_ref_link_btn">Copy to Clipboard</a>
                         </div>
                         <div class="valid-feedback">Looks good!</div>
                     </div>
@@ -62,7 +72,6 @@
 </div>
 
 <script>
-
     document.getElementById("passWord").addEventListener("input", function(){
         let p1 = document.getElementById("password1")
         let p2 = document.getElementById("password2")
@@ -109,6 +118,14 @@
             }, false)
             })
         })()
+
+    function copy_ref_link(){
+        let copyLink = document.getElementById("y_ref_link");
+        copyLink.select();
+        document.execCommand("copy");
+        alert("COPIED!!")
+    }
+    document.getElementById("y_ref_link_btn").addEventListener("click", copy_ref_link)
 </script>
 
 {% endblock %}

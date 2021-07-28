@@ -38,6 +38,11 @@ class Order(models.Model):
     def __str__(self):
         return f"{str(self.id)} | {self.customer}"
 
+    @property
+    def get_cart_total(self):   # total paise
+        orderitems = self.orderitem_set.all()                  # saare orderItem lo
+        total = sum([item.note_name.price for item in orderitems])   # unn pe loop laga ke har ek orderitem pe .get_total laga do toh total mil jaayega   - .get_total attribute hai jo orderitem mai defiened hai
+        return total
 
 class OrderItem(models.Model):
     note_name = models.ForeignKey(Note, on_delete=models.CASCADE, null=True)

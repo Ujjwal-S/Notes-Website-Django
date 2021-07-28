@@ -1,1 +1,14 @@
 next
+'jyada points hai toh directly ussko access de do aur points ki value ghata do
+
+
+refer linbk 
+
+aur points system
+
+
+
+PAY BUTTON PE CLICK KARNE KE BAAD
+JSON se view pe jjaate
+views.py py se nayi (razorpay wali) order_id  ,, nayi payment amount ke saath return kar dete 
+aur uss returned jo original se replace kar dete

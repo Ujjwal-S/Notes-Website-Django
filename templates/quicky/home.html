@@ -59,6 +59,7 @@ The Quicky Science | Home
                                 <input type="password" name="password2" placeholder="Confirm your Password." autocomplete="off" required>
                             </div>
                             {% csrf_token %}
+                            <input type="hidden" name="ref" value={{request.GET.ref}}>
                             <div class="my-hero-form-field">
                                 <button id="aage_register_btn" onclick="isValid()">Register</button>
                                 <a id="register-palat">Login</a>
